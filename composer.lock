@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "16d6db842646cb59ff44a3afc3315e05",
-    "content-hash": "a8c3d0888046edd14a96aecec4c865bf",
+    "hash": "f42450c83ee7f26b28757c4b7a77e7bc",
+    "content-hash": "0c511af328c4199df5ebed9a2df1a49c",
     "packages": [
         {
             "name": "hoa/consistency",
@@ -357,6 +357,65 @@
                 "library"
             ],
             "time": "2016-01-11 09:13:46"
+        },
+        {
+            "name": "hoa/mime",
+            "version": "3.16.01.15",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hoaproject/Mime.git",
+                "reference": "c26f02fc531a0e66eb15ccab1d73e76fdb0fa5f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hoaproject/Mime/zipball/c26f02fc531a0e66eb15ccab1d73e76fdb0fa5f6",
+                "reference": "c26f02fc531a0e66eb15ccab1d73e76fdb0fa5f6",
+                "shasum": ""
+            },
+            "require": {
+                "hoa/consistency": "~1.0",
+                "hoa/exception": "~1.0",
+                "hoa/protocol": "~1.0",
+                "hoa/stream": "~1.0",
+                "hoa/zformat": "~1.0"
+            },
+            "require-dev": {
+                "hoa/file": "~1.0",
+                "hoa/test": "~2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hoa\\Mime\\": "."
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ivan Enderlin",
+                    "email": "ivan.enderlin@hoa-project.net"
+                },
+                {
+                    "name": "Hoa community",
+                    "homepage": "http://hoa-project.net/"
+                }
+            ],
+            "description": "The Hoa\\Mime library.",
+            "homepage": "http://hoa-project.net/",
+            "keywords": [
+                "library",
+                "mime",
+                "type"
+            ],
+            "time": "2016-01-14 21:32:00"
         },
         {
             "name": "hoa/protocol",

@@ -1,38 +1,54 @@
 <?php
-// run php -S 127.0.0.1:8080 -t public public\app.php
-header('Access-Control-Allow-Origin: *');
-
-if ('OPTIONS' === $_SERVER['REQUEST_METHOD'] && isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD'])) {
-    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE');
-    die;
-}
-
-/**
- * PHP Settings
- */
 date_default_timezone_set('Europe/Paris');
-
-/**
- * Autoloader Composer
- */
-require_once dirname( __DIR__ )
-    . DIRECTORY_SEPARATOR . 'vendor'
-    . DIRECTORY_SEPARATOR . 'autoload.php';
-
-/** ******************************************************************************************************* **/
 
 use  \Hoa\Dispatcher;
 
 $templates = new League\Plates\Engine(__DIR__.'/../views');
 $router = new Hoa\Router\Http\Http();
 $router
-    ->get('css', '/home.css', function () {
-        echo file_get_contents(__DIR__.'/home.css');
-    })
     ->get('m', '/', function () use($templates){
-        echo $templates->render('home');
+        echo $templates->render('admin/titre');
     })
-  
+
+    ->get('api_list', '/api/titres', function () {
+        $directory = new Hoa\File\Finder();
+
+        $directory->in(__DIR__.'/../data');
+
+        $list = [];
+
+
+        foreach ($directory as $file) {
+          if($file->isLink() === false) {
+            $list[] =  [
+              'path' => $file->getRealPath(),
+              'name' => $file->getFilename(),
+              'date' => $file->getMTime(),
+              'content' => json_decode($file->open()->readAll(), true)
+            ];
+          }
+      }
+
+      echo json_encode($list);
+
+
+    })
+
+    ->get('api_current', '/api/current', function () {
+        $current = __DIR__.'/../data/current';
+        $current = new Hoa\File\SplFileInfo($current);
+
+
+      echo json_encode([
+            'path' => $current->getRealPath(),
+            'name' => $current->getFilename(),
+            'date' => $current->getMTime(),
+            'content' => json_decode($current->open()->readAll(), true)
+          ]);
+
+
+    })
+
     ->get('t', '/titre', function () use($templates) {
 
         $current = new Hoa\File\Read(__DIR__.'/../data/current');
