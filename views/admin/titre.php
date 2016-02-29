@@ -31,13 +31,60 @@
     </div>
     <!-- /.row -->
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> Titres</h3>
                 </div>
                 <div class="panel-body">
                     <div class="titre_list list-group"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-tasks fa-fw"></i> Détails</h3>
+                </div>
+                <div class="panel-body">
+                  <form class="form-horizontal">
+                    <div class="form-group">
+                      <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="form_name" placeholder="Name">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputPassword3" class="col-sm-2 control-label">Titre</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="form_titre" placeholder="Titre">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputPassword3" class="col-sm-2 control-label">Background-Color</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="form_bcolor" placeholder="Back Color">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputPassword3" class="col-sm-2 control-label">Color</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="form_color" placeholder="Color">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputPassword3" class="col-sm-2 control-label">Witdh</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="form_width" placeholder="Width">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-sm-offset-2 col-sm-10">
+                        <input type="hidden" id="form_uri">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                      </div>
+                    </div>
+                  </form>
                 </div>
             </div>
         </div>
