@@ -34,6 +34,27 @@ $router
 
     })
 
+    ->post('define_current', '/api/define', function () {
+
+      $uri = (isset($_POST['uri'])) ? $_POST['uri'] : null;
+
+      if($uri === null){
+        throw new Exception("URI not found", 1);
+      }
+
+      if(file_exists($uri) === true) {
+
+          unlink(__DIR__.'/../data/current');
+          symlink($uri, __DIR__.'/../data/current');
+
+      }
+      else {
+        throw new Exception("Error 404", 1);
+
+      }
+
+
+    })
     ->get('api_current', '/api/current', function () {
         $current = __DIR__.'/../data/current';
         $current = new Hoa\File\SplFileInfo($current);
