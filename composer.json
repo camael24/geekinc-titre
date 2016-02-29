@@ -1,0 +1,9 @@
+{
+  
+    "require": {
+        "hoa/router": "3.16.01.14",
+        "hoa/dispatcher": "1.16.01.15",
+        "hoa/file": "1.16.01.15",
+        "league/plates": "^3.1"
+    }
+}
