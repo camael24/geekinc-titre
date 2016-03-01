@@ -1,18 +1,27 @@
-try {
-    var source    = new EventSource('server.php');
-    
-    source.onopen = function () {
-        output.appendChild(document.createElement('hr'));
+  var host   = 'ws://127.0.0.1:8889';
+  var socket = null;
 
-        return;
-    };
-    source.onmessage = function (evt) {
-        var samp       = document.createElement('samp');
-        samp.innerHTML = evt.data + '\n';
-        output.appendChild(samp);
+  try {
+      socket = new WebSocket(host);
+      socket.onopen = function () {
+          console.log('connection is opened');
+          return;
+      };
+      socket.onmessage = function (msg) {
+          data = JSON.parse(msg.data);
+          content = data.content;
+          $('#titre')
+            .css('background-color', content.bcolor)
+            .css('color', content.color)
+            .css('width', content.width)
+            .text(content.titre);
 
-        return;
-    };
-} catch (e) {
-    console.log(e);
-}
+          return;
+      };
+      socket.onclose = function () {
+          console.log('connection is closed');
+          return;
+      };
+  } catch (e) {
+      console.log(e);
+  }

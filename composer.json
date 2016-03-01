@@ -6,6 +6,6 @@
         "hoa/file": "1.16.01.15",
         "league/plates": "^3.1",
         "hoa/mime": "3.16.01.15",
-        "hoa/eventsource": "3.16.01.14"
+        "hoa/websocket": "3.16.01.14"
     }
 }

@@ -2,14 +2,30 @@
 
   require_once __DIR__.'/../vendor/autoload.php';
 
+$websocket = new Hoa\Websocket\Server(
+    new Hoa\Socket\Server('tcp://127.0.0.1:8889')
+);
+$websocket->on('open', function (Hoa\Event\Bucket $bucket) {
+    echo 'new connection', "\n";
 
-  $server = new Hoa\Eventsource\Server();
+    return;
+});
+$websocket->on('message', function (Hoa\Event\Bucket $bucket) {
+    $data = $bucket->getData();
+    
+    $bucket->getSource()->broadcast($data['message']);
+    return;
+});
+$websocket->on('close', function (Hoa\Event\Bucket $bucket) {
+    echo 'connection closed', "\n";
 
-  while (true) {
-      // “tick” is the event name.
-      $server->tick->send(time());
-      sleep(1);
-  }
+    return;
+});
 
+
+
+//$group[] = $websocket;
+//$group[] = $watcher;
+$websocket->run();
 
  ?>

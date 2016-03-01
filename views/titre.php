@@ -8,7 +8,7 @@
     </head>
     <body>
       <p class="content">
-        <span style="background-color:<?=$bcolor?>; color: <?=$color?>; width:<?=$width?>"><?=$this->e($titre)?></span>
+        <span id="titre" style="background-color:<?=$bcolor?>; color: <?=$color?>; width:<?=$width?>"><?=$this->e($titre)?></span>
       </p>
 
         <script src="/js/jquery.js"></script>
