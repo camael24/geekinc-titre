@@ -116,4 +116,17 @@ $('.trashed').on('click', function (e) {
   })
 });
 
+$('.newTitre').on('click', function (e) {
+  e.preventDefault();
+
+  $('.div_form').show();
+
+  $('#form_name').val('');
+  $('#form_titre').val('');
+  $('#form_bcolor').val('');
+  $('#form_color').val('');
+  $('#form_width').val('');
+  $('#form_uri').val('');
+})
+
 updateTitres();

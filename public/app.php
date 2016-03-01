@@ -58,11 +58,11 @@ $router
       $color = $p('color');
       $width = $p('width');
       $object = '{}';
+      $change = false;
 
       if($uri === '') {
         $file = new Hoa\File\ReadWrite($dir.DIRECTORY_SEPARATOR.$name);
       }
-
       // Regarde si le titre a changé
       if($uri !== '' && $uri !== realpath($dir.DIRECTORY_SEPARATOR.$name)) {
         $path = $dir.'/'.$name;
@@ -71,8 +71,6 @@ $router
       } else if(file_exists($uri))  {
         $file = new Hoa\File\ReadWrite($uri);
         $object = $file->readAll();
-      } else {
-        throw new Exception("Titre non trouvé", 1);
       }
 
       // Mise a jour de l'objet

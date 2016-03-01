@@ -38,7 +38,11 @@
                 </div>
                 <div class="panel-body">
                     <div class="titre_list list-group"></div>
+                      <div class="text-right">
+                        <a href="#" class="newTitre"><i class="fa fa-plus-circle fa-2x"></i></a>
+                      </div>
                 </div>
+
             </div>
         </div>
         <div class="div_form col-lg-6" style="display: none;">
