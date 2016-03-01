@@ -94,9 +94,9 @@ $router
 
       if(file_exists($uri) === true) {
 
-          $target = __DIR__.'/../data/current';
+          $target = realpath(__DIR__.'/../data/current');
           if(is_file($target)) {
-            unlink(__DIR__.'/../data/current');
+            unlink($target);
           }
           if(preg_match("#win#i", PHP_OS) > 0) {
             copy($uri, $target);
