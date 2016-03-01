@@ -19,7 +19,7 @@ $router
 
 
         foreach ($directory as $file) {
-          if($file->isLink() === false) {
+          if($file->isLink() === false and $file->getFilename() !== 'current') {
             $list[] =  [
               'path' => $file->getRealPath(),
               'name' => $file->getFilename(),
@@ -44,9 +44,14 @@ $router
 
       if(file_exists($uri) === true) {
 
+          $target = __DIR__.'/../data/current';
           unlink(__DIR__.'/../data/current');
-          symlink($uri, __DIR__.'/../data/current');
-
+          if(preg_match("#win#i", PHP_OS) > 0) {
+            copy($uri, $target);
+          }
+          else {
+            symlink($uri, $target);
+          }
       }
       else {
         throw new Exception("Error 404", 1);

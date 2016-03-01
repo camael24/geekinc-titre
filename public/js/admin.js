@@ -20,22 +20,24 @@ function updateTitres() {
         var html = '';
         var current = {};
         $.get('/api/current', function(data) {
-          current = JSON.parse(data);
-
-          console.log(current);
+            current = JSON.parse(data);
+            console.log(current);
 
           for(i=0; i< titres.length; i++){
-            if(titres[i].path == current.path) {
-              html += '<div class="list-group-item active" data-i="'+i+'">'+
-              '<a href="#" class="details pull-right" data-i="'+i+'" style="visibility:hidden"><i class="fa fa-fw fa-edit"></i></a>'+
-              '<a href="#" class="pull-right" style="visibility:hidden"><i class="fa fa-fw fa-rocket"></i></a>'+
-              '<span class="badge">'+titres[i].date+'</span><i class="fa fa-fw fa-ticket"></i>['+titres[i].name+'] '+titres[i].content.titre+'</div>'
+            console.log(titres[i].name)
+            console.log(current.name)
+            if(titres[i].content.name == current.content.name) {
+              html += '<div class="list-group-item active" data-i="'+i+'"><div class="btn-group pull-right">'+
+              '<a href="#" class="btn btn-xs btn-default details" data-i="'+i+'"><i class="fa fa-fw fa-edit"></i></a>'+
+              '</div><span class="badge">'+titres[i].date+'</span><i class="fa fa-fw fa-ticket"></i>['+titres[i].name+'] '+titres[i].content.titre+'</div>'
             }
             else {
               html += '<div class="list-group-item" data-i="'+i+'">'+
-              '<a href="#" class="details pull-right" data-i="'+i+'"><i class="fa fa-fw fa-edit"></i></a>'+
-              '<a href="#" class="activate pull-right" data-uri="'+titres[i].path+'"><i class="fa fa-fw fa-rocket"></i></a>'+
-              '<span class="badge pull-right">'+titres[i].date+'</span><i class="fa fa-fw fa-ticket"></i>['+titres[i].name+'] '+titres[i].content.titre+
+
+              '<div class="btn-group btn-xs pull-right">'+
+              '<a href="#" class="btn btn-xs btn-default details" data-i="'+i+'"><i class="fa fa-fw fa-edit"></i></a>'+
+              '<a href="#" class="btn btn-xs btn-primary activate" data-uri="'+titres[i].path+'"><i class="fa fa-fw fa-rocket"></i></a>'+
+              '</div><span class="badge pull-right">'+titres[i].date+'</span><i class="fa fa-fw fa-ticket"></i>['+titres[i].name+'] '+titres[i].content.titre+
               '</div>'
             }
           }
@@ -65,7 +67,7 @@ $('.panel-body').on('click', '.details', function (e) {
 
   titre = titres[i];
 
-  $('#form_name').val(titre.name);
+  $('#form_name').val(titre.content.name);
   $('#form_titre').val(titre.content.titre);
   $('#form_bcolor').val(titre.content.bcolor);
   $('#form_color').val(titre.content.color);

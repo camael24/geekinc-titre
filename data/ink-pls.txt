@@ -1,6 +1,0 @@
-{
-  "titre" : "La Régie est en PLS",
-  "bcolor" : "red",
-  "color": "#00FF00",
-  "width": "180px"
-}
