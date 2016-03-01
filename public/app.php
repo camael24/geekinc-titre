@@ -9,7 +9,6 @@ $router
     ->get('m', '/', function () use($templates){
         echo $templates->render('admin/titre');
     })
-
     ->get('api_list', '/api/titres', function () {
         $directory = new Hoa\File\Finder();
 
@@ -33,7 +32,64 @@ $router
 
 
     })
+    ->post('u', '/api/', function () {
+      $dir = __DIR__.'/../data';
 
+      $p = function ($key) {
+        return (isset($_POST[$key])) ? $_POST[$key] : null;
+      };
+
+      $format = function ($name) {
+          $name = str_replace([' ', '_'] , '-', $name);
+          $ext = strpos($name, '.json')+5;
+
+          if(strlen($name) !== $ext) {
+            $name .= '.json';
+          }
+
+
+        return $name;
+      };
+
+      $uri = $p('uri');
+      $name = $format($p('name'));
+      $titre = $p('titre');
+      $bcolor = $p('bcolor');
+      $color = $p('color');
+      $width = $p('width');
+      $object = '{}';
+
+      if($uri === '') {
+        $file = new Hoa\File\ReadWrite($dir.DIRECTORY_SEPARATOR.$name);
+      }
+
+      // Regarde si le titre a changé
+      if($uri !== '' && $uri !== realpath($dir.DIRECTORY_SEPARATOR.$name)) {
+        $path = $dir.'/'.$name;
+        $file = new Hoa\File\ReadWrite($path);
+        $change = true;
+      } else if(file_exists($uri))  {
+        $file = new Hoa\File\ReadWrite($uri);
+        $object = $file->readAll();
+      } else {
+        throw new Exception("Titre non trouvé", 1);
+      }
+
+      // Mise a jour de l'objet
+      $object = json_decode($object);
+      $object->name = $name;
+      $object->titre = $titre;
+      $object->bcolor = $bcolor;
+      $object->color = $color;
+      $object->width = $width;
+
+      $file->truncate(0);
+      $file->writeAll(json_encode($object));
+
+      if($change === true)  {
+        unlink($uri);
+      }
+    })
     ->post('define_current', '/api/define', function () {
 
       $uri = (isset($_POST['uri'])) ? $_POST['uri'] : null;
@@ -45,7 +101,9 @@ $router
       if(file_exists($uri) === true) {
 
           $target = __DIR__.'/../data/current';
-          unlink(__DIR__.'/../data/current');
+          if(is_file($target)) {
+            unlink(__DIR__.'/../data/current');
+          }
           if(preg_match("#win#i", PHP_OS) > 0) {
             copy($uri, $target);
           }
@@ -62,6 +120,11 @@ $router
     })
     ->get('api_current', '/api/current', function () {
         $current = __DIR__.'/../data/current';
+
+        if(is_file($current) === false) {
+          echo '{}';
+            return;
+        }
         $current = new Hoa\File\SplFileInfo($current);
 
 
@@ -74,7 +137,11 @@ $router
 
 
     })
+    ->post('d', '/api/delete', function () {
+        $uri = (isset($_POST['uri'])) ? $_POST['uri'] : null;
 
+        unlink($uri);
+    })
     ->get('t', '/titre', function () use($templates) {
 
         $current = new Hoa\File\Read(__DIR__.'/../data/current');
@@ -88,8 +155,8 @@ $router
           'width' => $json->width
         ]
       );
-    })
-    ;
+    });
+
 $dispatcher = new Hoa\Dispatcher\Basic();
 
 try {

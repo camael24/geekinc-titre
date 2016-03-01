@@ -41,10 +41,10 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+        <div class="div_form col-lg-6" style="display: none;">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-tasks fa-fw"></i> Détails</h3>
+                    <h3 class="panel-title"><i class="fa fa-tasks fa-fw"></i> Détails <a href="#"class="form_close close"><i class="fa fa-fw fa-close pull-right"></i></a></h3>
                 </div>
                 <div class="panel-body">
                   <form class="form-horizontal">
@@ -81,7 +81,8 @@
                     <div class="form-group">
                       <div class="col-sm-offset-2 col-sm-10">
                         <input type="hidden" id="form_uri">
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="submit" class="form_send btn btn-primary">Update</button>
+                        <a href="#" class="trashed btn btn-danger"><i class="fa fa-fw fa-trash"></i></a>
                       </div>
                     </div>
                   </form>

@@ -20,12 +20,8 @@ function updateTitres() {
         var html = '';
         var current = {};
         $.get('/api/current', function(data) {
-            current = JSON.parse(data);
-            console.log(current);
-
+          current = JSON.parse(data);
           for(i=0; i< titres.length; i++){
-            console.log(titres[i].name)
-            console.log(current.name)
             if(titres[i].content.name == current.content.name) {
               html += '<div class="list-group-item active" data-i="'+i+'"><div class="btn-group pull-right">'+
               '<a href="#" class="btn btn-xs btn-default details" data-i="'+i+'"><i class="fa fa-fw fa-edit"></i></a>'+
@@ -54,8 +50,32 @@ $('.panel-body').on('click', '.activate', function (e) {
   var uri = $(this).data('uri');
 
   $.post('/api/define', 'uri='+uri, function (data) {
+    updateTitres();
+  })
 
-    console.log(data);
+})
+
+$('.form_close').on('click', function(e) {
+  e.preventDefault();
+
+  $('.div_form').hide();
+})
+
+$('.form_send').on('click', function (e) {
+  e.preventDefault();
+
+  data = {
+    uri: $('#form_uri').val(),
+    name: $('#form_name').val(),
+    titre: $('#form_titre').val(),
+    bcolor: $('#form_bcolor').val(),
+    color: $('#form_color').val(),
+    width: $('#form_width').val()
+
+  };
+
+  $.post('/api/', data, function (data) {
+
     updateTitres();
   })
 
@@ -63,8 +83,10 @@ $('.panel-body').on('click', '.activate', function (e) {
 
 $('.panel-body').on('click', '.details', function (e) {
 
+e.preventDefault();
   var i = $(this).data('i');
 
+  $('.div_form').show();
   titre = titres[i];
 
   $('#form_name').val(titre.content.name);
@@ -74,6 +96,24 @@ $('.panel-body').on('click', '.details', function (e) {
   $('#form_width').val(titre.content.width);
   $('#form_uri').val(titre.path);
 
+
+  updateTitres();
 })
+
+$('.trashed').on('click', function (e) {
+  e.preventDefault();
+
+  $.post('/api/delete', 'uri='+$('#form_uri').val(), function (data) {
+
+    $('#form_name').val();
+    $('#form_titre').val();
+    $('#form_bcolor').val();
+    $('#form_color').val();
+    $('#form_width').val();
+    $('#form_uri').val();
+
+    updateTitres();
+  })
+});
 
 updateTitres();
