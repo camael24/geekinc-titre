@@ -102,6 +102,7 @@ $router
             copy($uri, $target);
           }
           else {
+            var_dump($uri, $target);
             symlink($uri, $target);
           }
       }
