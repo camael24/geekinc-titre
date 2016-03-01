@@ -17,7 +17,7 @@ $watcher->in(__DIR__.'/../data');
 
 
 $watcher->on('modify' , function () use ($client){
-    $current = __DIR__.'/../data/current';
+    $current = realpath(__DIR__.'/../data/').'/current';
     if(is_file($current) === false) {
           $json = json_encode([
             'path' => '',
