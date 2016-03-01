@@ -3,7 +3,7 @@
   require_once __DIR__.'/../vendor/autoload.php';
 
   $client   = new Hoa\Websocket\Client(
-      new Hoa\Socket\Client('tcp://127.0.0.1:8889')
+      new Hoa\Socket\Client('tcp://geek.ark.im:8889')
   );
   $client->setHost('localhost');
   $client->connect();

@@ -3,7 +3,7 @@
   require_once __DIR__.'/../vendor/autoload.php';
 
 $websocket = new Hoa\Websocket\Server(
-    new Hoa\Socket\Server('tcp://127.0.0.1:8889')
+    new Hoa\Socket\Server('tcp://geek.ark.im:8889')
 );
 $websocket->on('open', function (Hoa\Event\Bucket $bucket) {
     echo 'new connection', "\n";
@@ -12,7 +12,7 @@ $websocket->on('open', function (Hoa\Event\Bucket $bucket) {
 });
 $websocket->on('message', function (Hoa\Event\Bucket $bucket) {
     $data = $bucket->getData();
-    
+
     $bucket->getSource()->broadcast($data['message']);
     return;
 });
