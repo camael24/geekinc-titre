@@ -116,7 +116,13 @@ $router
         $current = __DIR__.'/../data/current';
 
         if(is_file($current) === false) {
-          echo '{}';
+          echo json_encode([
+                'path' => '',
+                'name' => '',
+                'date' => '',
+                'content' => ['name' => '','titre' => '','bcolor' => '','color' => '','width' => '']
+              ]);
+
             return;
         }
         $current = new Hoa\File\SplFileInfo($current);
