@@ -94,7 +94,7 @@ $router
 
       if(file_exists($uri) === true) {
 
-          $target = realpath(__DIR__.'/../data/').'current';
+          $target = realpath(__DIR__.'/../data/').'/current';
           if(is_file($target)) {
             unlink($target);
           }
