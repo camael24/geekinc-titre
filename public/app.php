@@ -11,18 +11,14 @@ $router
     })
     ->get('api_list', '/api/titres', function () {
         $directory = new Hoa\File\Finder();
-
         $directory->in(__DIR__.'/../data');
-
         $list = [];
-
-
         foreach ($directory as $file) {
           if($file->isLink() === false and $file->getFilename() !== 'current') {
             $list[] =  [
               'path' => $file->getRealPath(),
               'name' => $file->getFilename(),
-              'date' => $file->getMTime(),
+              'date' => date('H:i:s d/m/Y', $file->getMTime()),
               'content' => json_decode($file->open()->readAll(), true)
             ];
           }

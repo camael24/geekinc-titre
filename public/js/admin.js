@@ -25,6 +25,7 @@ function updateTitres() {
             if(titres[i].content.name == current.content.name) {
               html += '<div class="list-group-item active" data-i="'+i+'"><div class="btn-group pull-right">'+
               '<a href="#" class="btn btn-xs btn-default details" data-i="'+i+'"><i class="fa fa-fw fa-edit"></i></a>'+
+              '<a href="#" class="btn btn-xs btn-default" style="visibility: hidden" ><i class="fa fa-fw fa-map"></i></a>'+
               '</div><span class="badge">'+titres[i].date+'</span><i class="fa fa-fw fa-ticket"></i>['+titres[i].name+'] '+titres[i].content.titre+'</div>'
             }
             else {
@@ -77,6 +78,7 @@ $('.form_send').on('click', function (e) {
   $.post('/api/', data, function (data) {
 
     updateTitres();
+    $('.div_form').hide();
   })
 
 })
@@ -96,7 +98,7 @@ e.preventDefault();
   $('#form_width').val(titre.content.width);
   $('#form_uri').val(titre.path);
 
-
+  $('.form_send').text('Update').addClass('btn-primary').removeClass('btn-success');
   updateTitres();
 })
 
@@ -113,6 +115,7 @@ $('.trashed').on('click', function (e) {
     $('#form_uri').val();
 
     updateTitres();
+    $('.div_form').hide();
   })
 });
 
@@ -127,6 +130,8 @@ $('.newTitre').on('click', function (e) {
   $('#form_color').val('');
   $('#form_width').val('');
   $('#form_uri').val('');
+
+  $('.form_send').text('New').removeClass('btn-primary').addClass('btn-success');
 })
 
 updateTitres();
