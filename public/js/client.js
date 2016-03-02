@@ -1,4 +1,4 @@
-var host   = 'ws://127.0.0.1:8889';
+var host   = 'ws://geek.ark.im:8889';
 var socket = null;
 var titleContainer = document.getElementById('title')
 
