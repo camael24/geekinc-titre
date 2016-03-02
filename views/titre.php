@@ -10,7 +10,7 @@
     </head>
     <body>
       <p class="content">
-        <div id="title" class="hidden transition geekinc"><?=$this->e($titre)?></div>
+        <div id="title" class="hidden transition geekinc" data-duration="<?=$this->e($duration)?>"><?=$this->e($titre)?></div>
       </p>
 
         <script src="/js/jquery.js"></script>

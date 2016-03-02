@@ -1,6 +1,6 @@
 var host   = 'ws://geek.ark.im:8889';
 var socket = null;
-var titleContainer = document.getElementById('title')
+var titleContainer = $('#title')
 
 function updateTitre(message, duration) {
   titleContainer.textContent = title.text;
@@ -19,24 +19,27 @@ function hideafter(duration) {
       }, duration*1000);
   }
 }
-
 try {
     socket = new WebSocket(host);
     socket.onopen = function () {
         console.log('connection is opened');
-        showContainer();
+
         return;
     };
     socket.onmessage = function (msg) {
         data = JSON.parse(msg.data);
         content = data.content;
 
-console.log(data);
-
+        console.log(data);
         $('#title')
           .removeClass('geekinc')
           .addClass(content.class)
           .text(content.titre);
+        if(content.duration)
+        {
+          hideafter(duration);
+        }
+
         return;
     };
     socket.onclose = function () {
@@ -45,4 +48,11 @@ console.log(data);
     };
 } catch (e) {
     console.log(e);
+}
+showContainer();
+
+var duration = titleContainer.data('duration');
+
+if(duration){
+ hideafter(duration)
 }
