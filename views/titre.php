@@ -5,10 +5,12 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title></title>
         <meta name="description" content="">
+
+        <link href="/css/client.css" rel="stylesheet">
     </head>
     <body>
       <p class="content">
-        <span id="titre" style="background-color:<?=$bcolor?>; color: <?=$color?>; width:<?=$width?>"><?=$this->e($titre)?></span>
+        <div id="title" class="hidden transition geekinc"><?=$this->e($titre)?></div>
       </p>
 
         <script src="/js/jquery.js"></script>

@@ -26,7 +26,7 @@ function updateTitres() {
               html += '<div class="list-group-item active" data-i="'+i+'"><div class="btn-group pull-right">'+
               '<a href="#" class="btn btn-xs btn-default details" data-i="'+i+'"><i class="fa fa-fw fa-edit"></i></a>'+
               '<a href="#" class="btn btn-xs btn-default" style="visibility: hidden" ><i class="fa fa-fw fa-map"></i></a>'+
-              '</div><span class="badge">'+titres[i].date+'</span><i class="fa fa-fw fa-ticket"></i>['+titres[i].name+'] '+titres[i].content.titre+'</div>'
+              '</div><span class="badge">'+titres[i].date+'</span><span class="badge pull-right">'+titres[i].content.class+'</span><i class="fa fa-fw fa-ticket"></i>['+titres[i].name+'] '+titres[i].content.titre+'</div>'
             }
             else {
               html += '<div class="list-group-item" data-i="'+i+'">'+
@@ -34,7 +34,7 @@ function updateTitres() {
               '<div class="btn-group btn-xs pull-right">'+
               '<a href="#" class="btn btn-xs btn-default details" data-i="'+i+'"><i class="fa fa-fw fa-edit"></i></a>'+
               '<a href="#" class="btn btn-xs btn-primary activate" data-uri="'+titres[i].path+'"><i class="fa fa-fw fa-rocket"></i></a>'+
-              '</div><span class="badge pull-right">'+titres[i].date+'</span><i class="fa fa-fw fa-ticket"></i>['+titres[i].name+'] '+titres[i].content.titre+
+              '</div><span class="badge pull-right">'+titres[i].date+'</span><span class="badge pull-right">'+titres[i].content.class+'</span><i class="fa fa-fw fa-ticket"></i>['+titres[i].name+'] '+titres[i].content.titre+
               '</div>'
             }
           }
@@ -69,9 +69,8 @@ $('.form_send').on('click', function (e) {
     uri: $('#form_uri').val(),
     name: $('#form_name').val(),
     titre: $('#form_titre').val(),
-    bcolor: $('#form_bcolor').val(),
-    color: $('#form_color').val(),
-    width: $('#form_width').val()
+    class: $('#form_class').val(),
+    duration: $('#form_duration').val()
 
   };
 
@@ -93,9 +92,8 @@ e.preventDefault();
 
   $('#form_name').val(titre.content.name);
   $('#form_titre').val(titre.content.titre);
-  $('#form_bcolor').val(titre.content.bcolor);
-  $('#form_color').val(titre.content.color);
-  $('#form_width').val(titre.content.width);
+  $('#form_class').val(titre.content.class);
+  $('#form_duration').val(titre.content.duration);
   $('#form_uri').val(titre.path);
 
   $('.form_send').text('Update').addClass('btn-primary').removeClass('btn-success');
@@ -109,9 +107,8 @@ $('.trashed').on('click', function (e) {
 
     $('#form_name').val();
     $('#form_titre').val();
-    $('#form_bcolor').val();
-    $('#form_color').val();
-    $('#form_width').val();
+    $('#form_class').val();
+    $('#form_duration').val();
     $('#form_uri').val();
 
     updateTitres();
@@ -126,10 +123,10 @@ $('.newTitre').on('click', function (e) {
 
   $('#form_name').val('');
   $('#form_titre').val('');
-  $('#form_bcolor').val('');
-  $('#form_color').val('');
-  $('#form_width').val('');
+  $('#form_class').val('geekinc');
+  $('#form_duration').val('');
   $('#form_uri').val('');
+
 
   $('.form_send').text('New').removeClass('btn-primary').addClass('btn-success');
 })

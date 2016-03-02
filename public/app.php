@@ -50,9 +50,8 @@ $router
       $uri = $p('uri');
       $name = $format($p('name'));
       $titre = $p('titre');
-      $bcolor = $p('bcolor');
-      $color = $p('color');
-      $width = $p('width');
+      $class = $p('class');
+      $duration = $p('duration');
       $object = '{}';
       $change = false;
 
@@ -73,9 +72,9 @@ $router
       $object = json_decode($object);
       $object->name = $name;
       $object->titre = $titre;
-      $object->bcolor = $bcolor;
-      $object->color = $color;
-      $object->width = $width;
+      $object->class = $class;
+      $object->duration = $duration;
+
 
       $file->truncate(0);
       $file->writeAll(json_encode($object));
@@ -107,11 +106,39 @@ $router
       }
       else {
         throw new Exception("Error 404", 1);
-
       }
 
+        $client   = new Hoa\Websocket\Client(
+            new Hoa\Socket\Client('tcp://127.0.0.1:8889')
+        );
+        $client->setHost('localhost');
+        $client->connect();
 
-    })
+        $current = realpath(__DIR__.'/../data/').'/current';
+        if(is_file($current) === false) {
+              $json = json_encode([
+                'path' => '',
+                'name' => '',
+                'date' => '',
+                'content' => ['name' => '','titre' => '','class' => '','duration' => '']
+              ]);
+
+              $client->send($json);
+      }
+      else  {
+        $current = new Hoa\File\SplFileInfo($current);
+        $json = json_encode([
+              'path' => $current->getRealPath(),
+              'name' => $current->getFilename(),
+              'date' => $current->getMTime(),
+              'content' => json_decode($current->open()->readAll(), true)
+            ]);
+
+        $client->send($json);
+      }
+
+      $client->close();
+})
     ->get('api_current', '/api/current', function () {
         $current = __DIR__.'/../data/current';
 
@@ -120,7 +147,7 @@ $router
                 'path' => '',
                 'name' => '',
                 'date' => '',
-                'content' => ['name' => '','titre' => '','bcolor' => '','color' => '','width' => '']
+                'content' => ['name' => '','titre' => '','class' => 'geekinc','duration' => '']
               ]);
 
             return;
@@ -150,9 +177,8 @@ $router
         echo $templates->render('titre',
         [
           'titre' => $json->titre,
-          'bcolor' => $json->bcolor,
-          'color' => $json->color,
-          'width' => $json->width
+          'class' => $json->class,
+          'duration' => $json->duration
         ]
       );
     });

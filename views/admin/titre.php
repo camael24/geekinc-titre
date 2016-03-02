@@ -65,21 +65,20 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="inputPassword3" class="col-sm-2 control-label">Background-Color</label>
+                      <label for="inputPassword3" class="col-sm-2 control-label">css</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="form_bcolor" placeholder="Back Color">
+                        <select id="form_class" class="col-sm-2 form-control">
+                          <option selected="selected">geekinc</option>
+                          <option>geekinc-ink</option>
+                          <option>geekinc-bits</option>
+                          <option>geekinc-play</option>
+                        </select>
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="inputPassword3" class="col-sm-2 control-label">Color</label>
+                      <label for="inputPassword3" class="col-sm-2 control-label">Duration</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="form_color" placeholder="Color">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="inputPassword3" class="col-sm-2 control-label">Witdh</label>
-                      <div class="col-sm-10">
-                        <input type="text" class="form-control" id="form_width" placeholder="Width">
+                        <input type="text" class="form-control" id="form_duration" placeholder="Duration en s">
                       </div>
                     </div>
                     <div class="form-group">
